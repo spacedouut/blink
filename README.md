@@ -1,6 +1,37 @@
-# Blink Plugin for Scrypted
+# Vivint Camera Plugin for Scrypted (SPIKE)
 
-The Blink Plugin connects Scrypted to Blink Cloud, allowing you to access all of your Blink cameras in Scrypted.
-To get started, enter your username and password, then put in the 2FA code sent to your phone number.
+Fork of [scryptedapp/blink](https://github.com/scryptedapp/blink) (a Python-runtime Scrypted
+camera plugin) with the Blink API swapped for [vivintpy](https://github.com/natekspencer/vivintpy).
 
-Due to technical limitations, this plugin currently only supports fetching snapshots and streaming video.
+## What works (validated in spike harness)
+
+- Settings UI: username/password/2FA code + "use cloud motion events" toggle
+- vivintpy `Account` login incl. MFA flow (mirrors the Home Assistant integration)
+- Camera discovery across systems → panels → devices (only `Camera`-type devices)
+- Per-camera devices with `Camera`, `VideoCamera`, `MotionSensor` (cloud toggle),
+  and `Doorbell` (models whose name contains "Doorbell")
+- `getVideoStream()` → RTSP URL via ffmpeg media object, direct → panel → cloud fallback
+- `takePicture()` → Vivint thumbnail URL fetched through the account session
+- Cloud motion events via vivintpy PubNub subscription → Scrypted `MotionSensor`
+  + `Doorbell` events (auto-clear after 30s)
+
+## Not yet validated
+
+- Live login against the real Vivint Sky API (needs Asher's credentials)
+- Build/deploy to a real Scrypted server (`npm run build` / `scrypted-deploy`)
+- Whether `ScryptedInterface.Doorbell` event payload `{doorbell: true}` is the
+  correct Scrypted contract (matches other cloud camera plugins)
+
+## Build / deploy (same as blink)
+
+```bash
+npm install
+npm run build
+# then deploy via VS Code (scrypted-vscode-launch) or scrypted-deploy
+```
+
+The Scrypted Python runtime installs `src/requirements.txt` (`vivintpy`) on plugin load.
+
+## Spike
+
+See `SPIKE.md` in the spike root (`../SPIKE.md`) for the verdict and evidence.

@@ -1,20 +1,12 @@
 {
-   "name": "@scrypted/blink",
-   "version": "0.0.9",
-   "description": "Blink Plugin for Scrypted",
+   "name": "@scrypted/vivint",
+   "version": "0.0.1",
+   "description": "Vivint Camera Plugin for Scrypted (spike: fork of scryptedapp/blink, vivintpy-based)",
    "license": "Apache",
-   "repository": {
-      "type": "git",
-      "url": "git+https://github.com/scryptedapp/blink.git"
-   },
-   "bugs": {
-      "url": "https://github.com/scryptedapp/blink/issues"
-   },
-   "homepage": "https://github.com/scryptedapp/blink",
    "keywords": [
       "scrypted",
       "plugin",
-      "blink",
+      "vivint",
       "camera"
    ],
    "scripts": {
@@ -31,7 +23,7 @@
       "scrypted-package-json": "scrypted-package-json"
    },
    "scrypted": {
-      "name": "Blink Camera Plugin",
+      "name": "Vivint Camera Plugin",
       "runtime": "python",
       "type": "DeviceProvider",
       "interfaces": [
