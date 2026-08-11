@@ -78,10 +78,6 @@ class MotionSensor:
     pass
 
 
-class Doorbell:
-    pass
-
-
 Setting = dict
 Device = dict
 ResponsePictureOptions = list

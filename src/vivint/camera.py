@@ -10,7 +10,6 @@ from scrypted_sdk import (
     Camera,
     VideoCamera,
     MotionSensor,
-    Doorbell,
     MediaObject,
     ResponsePictureOptions,
     RequestPictureOptions,
@@ -24,8 +23,13 @@ MOTION_RESET_SECONDS = 30
 SNAPSHOT_CACHE_SECONDS = 60
 
 
-class VivintCamera(ScryptedDeviceBase, Camera, VideoCamera, MotionSensor, Doorbell):
-    """A single Vivint camera. Ported from scryptedapp/blink (BlinkCamera)."""
+class VivintCamera(ScryptedDeviceBase, Camera, VideoCamera, MotionSensor):
+    """A single Vivint camera. Ported from scryptedapp/blink (BlinkCamera).
+
+    The Doorbell interface has no Python class in the bundled scrypted_sdk; it is
+    declared via ScryptedInterface.Doorbell in the device manifest and events are
+    emitted with ScryptedInterface.Doorbell.value.
+    """
 
     account: object
     panel: object
