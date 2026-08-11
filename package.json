@@ -1,7 +1,7 @@
 {
    "name": "scrypted-vivint",
    "version": "0.0.1",
-   "description": "Vivint Camera Plugin for Scrypted (spike: fork of scryptedapp/blink, vivintpy-based)",
+   "description": "Vivint Camera Plugin for Scrypted",
    "license": "Apache",
    "keywords": [
       "scrypted",
