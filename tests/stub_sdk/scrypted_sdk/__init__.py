@@ -13,12 +13,12 @@ class ScryptedInterface(Enum):
     Camera = "Camera"
     VideoCamera = "VideoCamera"
     MotionSensor = "MotionSensor"
-    Doorbell = "Doorbell"
     Settings = "Settings"
 
 
 class ScryptedDeviceType(Enum):
     Camera = "Camera"
+    Doorbell = "Doorbell"
 
 
 class ScryptedDeviceBase:

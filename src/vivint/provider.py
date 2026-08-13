@@ -210,7 +210,9 @@ class VivintProvider(ScryptedDeviceBase, DeviceProvider, Settings):
                         if self.use_cloud_motion:
                             interfaces.append(ScryptedInterface.MotionSensor.value)
                         if device.model and "Doorbell" in device.model:
-                            interfaces.append(ScryptedInterface.Doorbell.value)
+                            # Plain string: ScryptedInterface has no Doorbell member
+                            # in the bundled Python SDK (ScryptedDeviceType does).
+                            interfaces.append("Doorbell")
 
                         manifest: Device = {
                             "name": device.name,

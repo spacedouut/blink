@@ -16,7 +16,6 @@ from scrypted_sdk import (
     RequestMediaStreamOptions,
     ResponseMediaStreamOptions,
     FFmpegInput,
-    ScryptedInterface,
 )
 
 MOTION_RESET_SECONDS = 30
@@ -26,9 +25,10 @@ SNAPSHOT_CACHE_SECONDS = 60
 class VivintCamera(ScryptedDeviceBase, Camera, VideoCamera, MotionSensor):
     """A single Vivint camera. Ported from scryptedapp/blink (BlinkCamera).
 
-    The Doorbell interface has no Python class in the bundled scrypted_sdk; it is
-    declared via ScryptedInterface.Doorbell in the device manifest and events are
-    emitted with ScryptedInterface.Doorbell.value.
+    The Doorbell interface has no Python class in the bundled scrypted_sdk, and
+    ScryptedInterface has no Doorbell member either (Doorbell exists only as a
+    ScryptedDeviceType). Interface names are plain strings, so the doorbell
+    manifest entry and doorbell events use the literal "Doorbell" string.
     """
 
     account: object
@@ -74,7 +74,8 @@ class VivintCamera(ScryptedDeviceBase, Camera, VideoCamera, MotionSensor):
             self.__motion_task = asyncio.create_task(_reset())
 
     def doorbell(self) -> None:
-        self.onDeviceEvent(ScryptedInterface.Doorbell.value, {"doorbell": True})
+        # "Doorbell" is a plain interface-name string (see class docstring).
+        self.onDeviceEvent("Doorbell", {"doorbell": True})
 
     async def getPictureOptions(self) -> ResponsePictureOptions:
         return []
